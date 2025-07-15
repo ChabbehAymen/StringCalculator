@@ -1,0 +1,14 @@
+C:\Users\chebb\source\repos\StringCalculator\StringCalculator\bin\Debug\net8.0\StringCalculator.exe
+C:\Users\chebb\source\repos\StringCalculator\StringCalculator\bin\Debug\net8.0\StringCalculator.deps.json
+C:\Users\chebb\source\repos\StringCalculator\StringCalculator\bin\Debug\net8.0\StringCalculator.runtimeconfig.json
+C:\Users\chebb\source\repos\StringCalculator\StringCalculator\bin\Debug\net8.0\StringCalculator.dll
+C:\Users\chebb\source\repos\StringCalculator\StringCalculator\bin\Debug\net8.0\StringCalculator.pdb
+C:\Users\chebb\source\repos\StringCalculator\StringCalculator\obj\Debug\net8.0\StringCalculator.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\chebb\source\repos\StringCalculator\StringCalculator\obj\Debug\net8.0\StringCalculator.AssemblyInfoInputs.cache
+C:\Users\chebb\source\repos\StringCalculator\StringCalculator\obj\Debug\net8.0\StringCalculator.AssemblyInfo.cs
+C:\Users\chebb\source\repos\StringCalculator\StringCalculator\obj\Debug\net8.0\StringCalculator.csproj.CoreCompileInputs.cache
+C:\Users\chebb\source\repos\StringCalculator\StringCalculator\obj\Debug\net8.0\StringCalculator.dll
+C:\Users\chebb\source\repos\StringCalculator\StringCalculator\obj\Debug\net8.0\refint\StringCalculator.dll
+C:\Users\chebb\source\repos\StringCalculator\StringCalculator\obj\Debug\net8.0\StringCalculator.pdb
+C:\Users\chebb\source\repos\StringCalculator\StringCalculator\obj\Debug\net8.0\StringCalculator.genruntimeconfig.cache
+C:\Users\chebb\source\repos\StringCalculator\StringCalculator\obj\Debug\net8.0\ref\StringCalculator.dll
