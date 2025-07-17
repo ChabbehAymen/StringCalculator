@@ -9,4 +9,4 @@ var program = CompositionRoot.ComposeProgram();
 //    .SplitWith(',')
 //    .Add("1\n2,3", StringCalculatorOptions.NoDelimiter);
 
-program.Add("//;\n1;2", StringCalculatorOptions.SingleDelimiterExpression);
+program.Add("//;\n1002;2", DelimiterSpecificationFactory.SingleDelimiterExpression);

@@ -120,3 +120,4 @@ C:\Users\chebb\source\repos\StringCalculator\StringCalculator.Tests\obj\Debug\ne
 C:\Users\chebb\source\repos\StringCalculator\StringCalculator.Tests\obj\Debug\net8.0\StringCalculator.Tests.pdb
 C:\Users\chebb\source\repos\StringCalculator\StringCalculator.Tests\obj\Debug\net8.0\StringCalculator.Tests.genruntimeconfig.cache
 C:\Users\chebb\source\repos\StringCalculator\StringCalculator.Tests\obj\Debug\net8.0\ref\StringCalculator.Tests.dll
+C:\Users\chebb\source\repos\StringCalculator\StringCalculator.Tests\obj\Debug\net8.0\StringCalculator.Tests.sourcelink.json

@@ -4,7 +4,7 @@ namespace StringCalculator.DelimiterSpecifications;
 
 public class SpecifySingleDelimiterExpression : IDelimiterSpecification
 {
-    public string[] GetNumbers(ExpressionHandler expression)
+    public int[] GetNumbers(ExpressionHandler expression)
     {
         return expression.WithSingleDelimiter();
     }

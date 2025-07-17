@@ -2,5 +2,5 @@
 
 public interface IDelimiterSpecification
 {
-    public string[] GetNumbers(ExpressionHandler expression);
+    public int[] GetNumbers(ExpressionHandler expression);
 }

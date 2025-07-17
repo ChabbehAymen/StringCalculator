@@ -12,3 +12,4 @@ C:\Users\chebb\source\repos\StringCalculator\StringCalculator\obj\Debug\net8.0\r
 C:\Users\chebb\source\repos\StringCalculator\StringCalculator\obj\Debug\net8.0\StringCalculator.pdb
 C:\Users\chebb\source\repos\StringCalculator\StringCalculator\obj\Debug\net8.0\StringCalculator.genruntimeconfig.cache
 C:\Users\chebb\source\repos\StringCalculator\StringCalculator\obj\Debug\net8.0\ref\StringCalculator.dll
+C:\Users\chebb\source\repos\StringCalculator\StringCalculator\obj\Debug\net8.0\StringCalculator.sourcelink.json

@@ -14,16 +14,30 @@ public class ExpressionHandler
         this.delimiterHandler = delimiterHandler;
         this.numbersHandler = numbersHandler;
     }
-    public string[] WithSplitters()
+    public int[] WithSplitters()
     {
         numbersHandler.SetNumbers(expression);
-        return numbersHandler.SplitNumbers(delimiterHandler.GetDelimiters());
+        numbersHandler.SplitNumbers(delimiterHandler.GetDelimiters());
+        return numbersHandler.ParseNumbers();
     }
-    public string[] WithSingleDelimiter()
+
+    // TODO Refactor
+    public int[] WithSingleDelimiter()
     {
-        delimiterHandler.SetDelimiterFromExpression(expression);
-        numbersHandler.ExtractNumbers(expression);
-        return numbersHandler.SplitNumbers(delimiterHandler.GetDelimiters());
+        delimiterHandler.ExtractSingleDelimiter(expression);
+        numbersHandler.SetNumbers(expression, true);
+        numbersHandler.SplitNumbers(delimiterHandler.GetDelimiters());
+        return numbersHandler.ParseNumbers();
+    }
+
+    // TODO Refactor
+    public int[] WithLargeDelimiter()
+    {
+        delimiterHandler.ExtractLargeDelimiter(expression);
+        numbersHandler.SetNumbers(expression, true);
+        numbersHandler.SplitNumbers(delimiterHandler.GetDelimiters());
+        return numbersHandler.ParseNumbers();
+
     }
 
     public void SetExpression(string expression)
@@ -31,7 +45,7 @@ public class ExpressionHandler
         this.expression = expression;
     }
 
-    internal void IncludeSplitter(char splitter)
+    public void IncludeSplitter(char splitter)
     {
         delimiterHandler.Include(splitter);
     }

@@ -1,11 +1,15 @@
 ﻿
 using StringCalculator.DelimiterSpecifications;
+using System.Runtime.CompilerServices;
 
 namespace StringCalculator;
 
 public partial class StringCalculator
 {
     ExpressionHandler expressionHandler;
+    int invocationCount = 0;
+
+    public event Action<string, int> AddOccurred;
 
     public StringCalculator(ExpressionHandler expressionHandler)
     {
@@ -14,32 +18,31 @@ public partial class StringCalculator
 
     public int Add(string expression, IDelimiterSpecification delimiterSpecification)
     {
+        invocationCount++;
+        AddOccurred?.Invoke(expression, invocationCount);
         if (string.IsNullOrEmpty(expression)) return 0;
         expressionHandler.SetExpression(expression);
         var numbers = delimiterSpecification.GetNumbers(expressionHandler);
         return Sum(numbers);
     }
 
-    private int Sum(string[] numbers) 
+    private int Sum(int[] numbers)
     {
-        var sum = 0;
-        foreach (var number in numbers)
-        {
-            sum += ParseNumber(number);
-        }
+
+        var sum = numbers.Sum();
+        var excludedNumbers = numbers.Where(n => n > 1000).ToList();
+        foreach (var number in excludedNumbers) { sum -= number; }
         return sum;
-    }
-
-    private int ParseNumber(string number)
-    {
-        if (int.TryParse(number, out var intNumber)) return intNumber;
-
-        throw new ArgumentException($"Unexpected Number: {number}");
     }
 
     public StringCalculator SplitWith(char splitter)
     {
         expressionHandler.IncludeSplitter(splitter);
        return this;
+    }
+
+    public int GetCalledCount()
+    {
+        return invocationCount;
     }
 }
