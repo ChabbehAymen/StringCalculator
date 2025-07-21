@@ -1,10 +1,13 @@
-using FluentAssertions;
 
 namespace StringCalculator.Tests;
+
+using FluentAssertions;
+using NSubstitute;
 
 public class StringCalculatorTests
 {
     StringCalculator sut;
+    INumbersPreparer numbersPreparer;
     public StringCalculatorTests()
     {
         sut = CompositionRoot.ComposeProgram();
@@ -16,56 +19,52 @@ public class StringCalculatorTests
     [InlineData("1,2", 3)]
     public void ShouldCalculateSumOfNumbersSplattedByComa(string input, int expected)
     {
-        sut.SplitWith(',');
-
-        var actual = sut.Add(input, DelimiterSpecificationFactory.NoDelimiter);
+        var actual = sut.Add(input, [',']);
         
         actual.Should().Be(expected);
     }
-
     [Fact]
     public void ShouldCalculateSumOfNumbersSplattedByNewLine()
     {
         const string Input = "1\n2,3";
         const int Expected = 6;
-        sut.SplitWith(',').SplitWith('\n');
 
-        var actual = sut.Add(Input, DelimiterSpecificationFactory.NoDelimiter);
+        var actual = sut.Add(Input, [',', '\n']);
 
         actual.Should().Be(Expected);
     }
-
+    
     [Fact]
     public void ShouldCalculateSumOfNumbersSplattedByProvidedDelimiter()
     {
         const string Input = "//;\n1;2";
         const int Expected = 3;
-        
-        var actual = sut.Add(Input, DelimiterSpecificationFactory.SingleDelimiterExpression);
+
+        var actual = sut.Add(Input);
 
         actual.Should().Be(Expected);
     }
 
     [Fact]
-    public void ShouldNotAcceptNegativeNumbers() 
+    public void ShouldNotAcceptNegativeNumbers()
     {
         const string Input = "//;\n-1;2";
 
-        var act = () => sut.Add(Input, DelimiterSpecificationFactory.SingleDelimiterExpression);
+        var act = () => sut.Add(Input);
 
         act.Should().Throw<ArgumentException>();
     }
 
     [Fact]
-    public void ShouldReturnAddInvocationCount() 
+    public void ShouldReturnAddInvocationCount()
     {
         const string Input = "//;\n1;2";
         const int Expected = 3;
-        sut.Add(Input, DelimiterSpecificationFactory.SingleDelimiterExpression);
-        sut.Add(Input, DelimiterSpecificationFactory.SingleDelimiterExpression);
-        sut.Add(Input, DelimiterSpecificationFactory.SingleDelimiterExpression);
+        sut.Add(Input);
+        sut.Add(Input);
+        sut.Add(Input);
 
-        var actual = sut.GetCalledCount();
+        var actual = sut.GetAddCallCount();
 
         actual.Should().Be(Expected);
     }
@@ -81,18 +80,18 @@ public class StringCalculatorTests
             invoked = true;
             number++;
         };
-        sut.Add(Input, DelimiterSpecificationFactory.SingleDelimiterExpression);
-        
+        sut.Add(Input);
+
         invoked.Should().BeTrue();
     }
 
     [Fact]
-    public void ShouldIgnoreNumbersBiggerThenOneThousand() 
+    public void ShouldIgnoreNumbersBiggerThenOneThousand()
     {
         const string Input = "//;\n10002;2";
         const int Expected = 2;
 
-        var actual = sut.Add(Input, DelimiterSpecificationFactory.SingleDelimiterExpression);
+        var actual = sut.Add(Input);
 
         actual.Should().Be(Expected);
     }
@@ -103,7 +102,18 @@ public class StringCalculatorTests
         const string Input = "//[fa]\n2fa2";
         const int Expected = 4;
 
-        var actual = sut.Add(Input, DelimiterSpecificationFactory.LargeDelimiterExpression);
+        var actual = sut.Add(Input);
+
+        actual.Should().Be(Expected);
+    }
+    
+    [Fact]
+    public void ShouldExceptMultiDelimiters()
+    {
+        const string Input = "//[*][%]\\n1*2%3";
+        const int Expected = 6;
+        
+        var actual = sut.Add(Input);
 
         actual.Should().Be(Expected);
     }

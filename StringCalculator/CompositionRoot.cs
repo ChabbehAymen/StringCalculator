@@ -1,14 +1,14 @@
-﻿
 namespace StringCalculator;
 
-public class CompositionRoot
+public static class CompositionRoot
 {
-    public static StringCalculator ComposeProgram() 
+    public static StringCalculator ComposeProgram()
     {
-        var delimiterHandler = new DelimiterHandler();
-        var numbersHandler = new NumbersHandler();
-        var expressionHandler = new ExpressionHandler(delimiterHandler, numbersHandler);
-        var stringCalculator = new StringCalculator(expressionHandler);
-        return stringCalculator;
+        var extractor = new RegexExtractor();
+        var splitter = new NumbersSplitter(extractor);
+        var delimiterExtractor = new DelimiterExtractor(extractor);
+        var numbersPreparer = new NumbersPreparer(splitter, delimiterExtractor);
+        var calculator = new StringCalculator(numbersPreparer);
+        return calculator;
     }
 }

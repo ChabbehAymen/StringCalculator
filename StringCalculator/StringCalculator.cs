@@ -1,29 +1,37 @@
-﻿
-using StringCalculator.DelimiterSpecifications;
-using System.Runtime.CompilerServices;
+﻿namespace StringCalculator;
 
-namespace StringCalculator;
-
-public partial class StringCalculator
+public class StringCalculator
 {
-    ExpressionHandler expressionHandler;
     int invocationCount = 0;
-
+    INumbersPreparer numbersPreparer;
+    
     public event Action<string, int> AddOccurred;
 
-    public StringCalculator(ExpressionHandler expressionHandler)
+    public StringCalculator(INumbersPreparer numbersPreparer)
     {
-        this.expressionHandler = expressionHandler;
+        this.numbersPreparer = numbersPreparer;
     }
 
-    public int Add(string expression, IDelimiterSpecification delimiterSpecification)
+    public int Add(string numbers, char[] splitters)
+    {
+        if (string.IsNullOrEmpty(numbers)) return 0;
+        invokeCall(numbers);
+        var entierNumbers = numbersPreparer.SplitNumbers(numbers, splitters);
+        return Sum(entierNumbers);
+    }
+    
+    void invokeCall(string input)
     {
         invocationCount++;
-        AddOccurred?.Invoke(expression, invocationCount);
+        AddOccurred?.Invoke(input, invocationCount);
+    }
+
+    public int Add(string expression)
+    {
         if (string.IsNullOrEmpty(expression)) return 0;
-        expressionHandler.SetExpression(expression);
-        var numbers = delimiterSpecification.GetNumbers(expressionHandler);
-        return Sum(numbers);
+        invokeCall(expression);
+        var entierNumbers = numbersPreparer.GetNumbers(expression);
+        return Sum(entierNumbers);
     }
 
     private int Sum(int[] numbers)
@@ -35,13 +43,7 @@ public partial class StringCalculator
         return sum;
     }
 
-    public StringCalculator SplitWith(char splitter)
-    {
-        expressionHandler.IncludeSplitter(splitter);
-       return this;
-    }
-
-    public int GetCalledCount()
+    public int GetAddCallCount()
     {
         return invocationCount;
     }

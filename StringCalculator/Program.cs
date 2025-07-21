@@ -2,11 +2,6 @@
 
 using StringCalculator;
 
-var program = CompositionRoot.ComposeProgram();
-//program.SplitWith(',').Add("1,2", StringCalculatorOptions.NoDelimiter);
-//program
-//    .SplitWith('\n')
-//    .SplitWith(',')
-//    .Add("1\n2,3", StringCalculatorOptions.NoDelimiter);
+var calculator = CompositionRoot.ComposeProgram();
 
-program.Add("//;\n1002;2", DelimiterSpecificationFactory.SingleDelimiterExpression);
+Console.WriteLine(calculator.Add("//[*][%]\\n1*2%3"));

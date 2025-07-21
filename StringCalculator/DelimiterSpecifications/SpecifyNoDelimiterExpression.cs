@@ -1,9 +1,0 @@
-﻿namespace StringCalculator.DelimiterSpecifications;
-
-public class SpecifyNoDelimiterExpression : IDelimiterSpecification
-{
-    public int[] GetNumbers(ExpressionHandler expression)
-    {
-        return expression.WithSplitters();
-    }
-}
