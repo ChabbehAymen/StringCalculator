@@ -4,7 +4,7 @@ namespace StringCalculator;
 
 public class RegexExtractor : IExtractor 
 {
-    const string NumbersPattern = @"\n(.+)"; // @"\n(.+)" works for most tests @"\\n(.+)" works for the lats test
+    const string NumbersPattern = @"\n(.+)";
     const string SingleDelimiterPattern = @"//(.)";
     private const string MultiDelimitersPattern = @"\[(.+?)\]";
     public string ExtractNumbers(string expression)
