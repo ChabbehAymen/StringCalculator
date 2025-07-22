@@ -110,11 +110,13 @@ public class StringCalculatorTests
     [Fact]
     public void ShouldExceptMultiDelimiters()
     {
-        const string Input = "//[*][%]\\n1*2%3";
+        const string Input = "//[*][%]\n1*2%3";
         const int Expected = 6;
         
         var actual = sut.Add(Input);
 
         actual.Should().Be(Expected);
     }
+    
+    
 }
